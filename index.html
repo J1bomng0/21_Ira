@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="countdown.css">
+  <title>22/10 ?</title>
+</head>
+<body>
+  <h1 class="title">22/10 ?</h1>
+  <div id="timer">
+    <div class="time-block">
+      <div id="days">00</div>
+      <span>DAYS</span>
+    </div>
+    <div class="time-block">
+      <div id="hours">00</div>
+      <span>HOURS</span>
+    </div>
+    <div class="time-block">
+      <div id="minutes">00</div>
+      <span>MINUTES</span>
+    </div>
+    <div class="time-block">
+      <div id="seconds">00</div>
+      <span>SECONDS</span>
+    </div>
+  </div>
+
+  <div class="stars"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+
+  <script>
+    const targetDate = new Date("2025-10-22T00:00:00").getTime();
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if(diff <= 0){
+        clearInterval(interval);
+        window.location.href = "index.html";
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000*60*60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000*60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        daysEl.textContent = days.toString().padStart(2, '0');
+        hoursEl.textContent = hours.toString().padStart(2, '0');
+        minutesEl.textContent = minutes.toString().padStart(2, '0');
+        secondsEl.textContent = seconds.toString().padStart(2, '0');
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
